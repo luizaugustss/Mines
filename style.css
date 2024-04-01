@@ -1,0 +1,191 @@
+/* Font import */
+/* @import url("https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap"); */
+
+/* General styling */
+* {
+  font-family: "Press Start 2P", cursive;
+  user-select: none;
+  box-sizing: border-box; /* Ensure all elements include padding and border in the width/height*/
+}
+
+body {
+  background: #1a1a1a; /* Dark background */
+  margin: 0; /* Remove default body margin */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+}
+
+/* Game container */
+.tabel {
+  width: 680px;
+  height: 680px;
+  background: #2b2b2b; /* Dark gray background */
+  border-radius: 20px;
+  border: 2px solid #000; /* Black border */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+  display: flex;
+  flex-direction: column; /* Align children vertically */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+/* Game board */
+.board {
+  margin-top: 20px;
+  width: 650px;
+  height: 650px;
+  display: grid;
+  border: 2px solid #000;
+  border-radius: 10px;
+  /* grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);  */
+  column-gap: 8px;
+  row-gap: 8px;
+  padding: 10px;
+}
+
+/* Game cell */
+.board > span {
+  background: #3a3a3a; /* Dark gray background */
+  color: #fff;
+  margin-top: 0%;
+  text-align: center;
+  align-content: center;
+  font-size: clamp(4px,4vw,15px) ;
+  height: 100%;
+  width: 100%;
+  border-radius: 10%;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+/* Hover effect */
+.board > span:hover {
+  background: #4a4a4a; /* Slightly darker gray on hover */
+}
+
+/* Click effect */
+.board > span:active {
+  transform: scale(0.95); /* Slight scale down on click */
+}
+
+/* Reset button */
+/* #reset {
+  margin-top: 20px;
+  margin-bottom: 5%;
+  padding: 10px 20px;
+  background: #d9534f; /* Red background */
+  /* color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+  /* align-self: center; /* Center horizontally */
+/*} */ 
+.number {
+
+ font-size: 80% ;
+ opacity: 20%;
+  }
+
+
+/* Reset button hover effect */
+/* #reset:hover {
+  background: #c9302c; /* Darker red on hover */
+/* }  */
+
+/* Win class */
+.win {
+  background: #f70000; /* Blue background for win indication */
+  animation: pulse 1s infinite alternate; /* Animation for highlighting */
+}
+
+/* Animation keyframes */
+@keyframes pulse {
+  from {
+    box-shadow: 0 0 0px #ffffff00;
+  }
+  to {
+    box-shadow: 0 0 10px 5px rgb(255, 255, 255); /* Slightly larger shadow when highlighted */
+  }
+}
+
+
+
+.bn1-hover {
+  width: 160px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  margin: 20px;
+  height: 55px;
+  text-align:center;
+  border: none;
+  background-size: 300% 100%;
+  border-radius: 50px;
+  moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+.bn1-hover:hover {
+  background-position: 100% 0;
+  moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+.bn1-hover:focus {
+  outline: none;
+}
+
+.bn1-hover.bn19 {
+  background-image: linear-gradient(
+    to right,
+    #f5ce62,
+    #e43603,
+    #fa7199,
+    #e85a19
+  );
+  box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
+}
+.img-icon{
+  margin-top: calc((75px/2) - (50px/2));
+  margin-left: 25px;
+  border-radius: 8px;
+  margin-right: 25px;
+
+}
+
+.info{
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  height: 75px;
+  align-content: center;
+}
+.info > div{
+  margin-top: calc((75px/2) - (35px/2));
+  height: 35px;
+  width: 70px;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  margin-left: 7px;
+  border-radius: 8px;
+  margin-right: 7px;
+  background-color: #b8b5b5;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, 
+  rgba(0, 0, 0, 0.12) 0px -12px 30px, 
+  rgba(0, 0, 0, 0.12) 0px 4px 6px, 
+  rgba(0, 0, 0, 0.17) 0px 12px 13px, 
+  rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
+}
