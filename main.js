@@ -6,7 +6,8 @@ window.addEventListener("focus", () =>{
 document.title = docTitle;
 })
 
-let width_board = 10
+let width_board = 20
+
 
 let length_board = 10
 var N_Cell =  width_board * length_board
