@@ -66,6 +66,7 @@ body {
   border-radius: 10%;
   cursor: pointer;
   position: relative;
+  
   transition: background-color 0.3s ease; /* Smooth background color transition */
 }
 
@@ -98,7 +99,7 @@ body {
   min-height: 0px;
   align-items: center;
  font-size: 80% ;
- opacity: 0%;
+ 
  position: relative;
 margin-bottom: 50%;
   }
@@ -200,4 +201,7 @@ margin-bottom: 50%;
   rgba(0, 0, 0, 0.17) 0px 12px 13px, 
   rgba(0, 0, 0, 0.09) 0px -3px 5px;
 
+}
+.infos{
+ text-align: center;
 }
