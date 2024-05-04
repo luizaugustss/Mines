@@ -1,11 +1,9 @@
-/* Font import */
-/* @import url("https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap"); */
 
 /* General styling */
 * {
-  font-family: "Press Start 2P", cursive;
+  font-family: sans-serif;
   user-select: none;
-  box-sizing: border-box; /* Ensure all elements include padding and border in the width/height*/
+
 }
 
 body {
@@ -35,15 +33,14 @@ body {
 /* Game board */
 .board {
 
-  margin-top: 20px;
-  width: 650px;
-  height: 500px;
+
+  width: 650px !important;
+  height: 500px !important;
   display: grid;
   grid-area: initial;
   border: 2px solid #000;
   border-radius: 5px;
-  /* grid-template-rows: repeat(5, 1fr);
-  grid-template-columns: repeat(3, 1fr);  */
+
   column-gap: 2px;
   row-gap: 2px;
   
@@ -58,7 +55,7 @@ body {
   color: #fff;
   margin-top: 0%;
   text-align: center;
-  display: grid;
+  display: block;
   align-content: center;
   font-size: clamp(4px,4vw,15px) ;
   height: 100%;
@@ -69,40 +66,34 @@ body {
   
   transition: background-color 0.3s ease; /* Smooth background color transition */
 }
+span * {
+  pointer-events: none;
+}
 
+span {
+  pointer-events: auto;
+}
 /* Hover effect */
 .board > span:hover {
   background: #4a4a4a; /* Slightly darker gray on hover */
 }
 
 /* Click effect */
-.board > span:active {
+ .board > span:active {
   transform: scale(0.95); /* Slight scale down on click */
-}
+ } 
 
-/* Reset button */
-/* #reset {
-  margin-top: 20px;
-  margin-bottom: 5%;
-  padding: 10px 20px;
-  background: #d9534f; /* Red background */
-  /* color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease; /* Smooth background color transition */
-  /* align-self: center; /* Center horizontally */
-/*} */ 
+
 .number {
+  
   vertical-align: middle;
   min-width: 0px;
   min-height: 0px;
   align-items: center;
- font-size: 80% ;
- 
  position: relative;
-margin-bottom: 50%;
+margin-bottom: 0%;
   }
+  
 
 
 /* Reset button hover effect */

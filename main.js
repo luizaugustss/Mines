@@ -1,5 +1,9 @@
 import { number_mine } from './number_mine.js';
-import { play } from './play.js';
+import { draw } from './Draw.js';
+import { win } from './Draw.js';
+import { lose } from './Draw.js';
+import { Reset_lose } from './Draw.js';
+var visited = []; // Initialize visited matrix
 
 
 let docTitle = document.title;
@@ -10,11 +14,11 @@ window.addEventListener("focus", () =>{
 document.title = docTitle;
 })
 
-let width_board = 20
+let width_board = 15
 
 
-let length_board = 30
-let bombs = 10
+let length_board = 20
+let bombs = 30
 document.getElementById('bombs').innerText = bombs
 var N_Cell =  width_board * length_board
 var matriz = new Array(width_board)
@@ -52,19 +56,34 @@ document.getElementById("board").style.gridTemplateColumns = "repeat("+length_bo
 
 const _ = document,
           Cell = Array.from(_.querySelectorAll('.board > span')),
-					reset = _.querySelector('#reset')
+					reset = _.querySelector('#reset');
+
+ event(true)
 
 
 function event(can) {
 	reset.addEventListener('click', fnreset)
   for(let c of Cell)
-    if(can)
+    if(can){
       c.addEventListener('click', play)
-    else
+      c.addEventListener('contextmenu', flags )
+    }else{
       c.removeEventListener('click', play)
+      c.removeEventListener('contextmenu', flags )
+    }
+    
 }
 
-event(true)
+function flags(event) {
+  if (event.target.tagName.toLowerCase() === 'span') {
+    console.log(event.target.id)
+  //This function will be called whenever the right mouse button is clicked on the span
+  draw(50,event.target.id)
+  // Prevent the context menu from showing up
+  event.preventDefault();
+
+}
+}
 function move(ind, sign) {
   arr[ind] = sign
   console.log(arr)
@@ -83,12 +102,18 @@ function move(ind, sign) {
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
+
 function cmp(a, b, c) {
   if(a && b && c)
     return (a === b) && (a === c) && (b === c)
 }
+
+// Make new matriz with bombs
 function new_mat(){
-  
+  let spans = document.querySelectorAll('span');
+  for (let i = 0; i < spans.length; i++) {
+    spans[i].style.backgroundColor = ''; // replace background color'#3a3a3a'
+  }
   for (let i = 0; i < width_board ; i++) {
     for (let j = 0; j < length_board ; j++) {
     
@@ -106,41 +131,86 @@ function new_mat(){
    matriz[rand_1][rand_2] = 1;
    cont_b++;
    }
+  
  }
-
+ console.table(matriz)
   for (let i = 0; i < width_board ; i++) {
     for (let j = 0; j < length_board ; j++) {
-      const p = document.createElement('p');
+      
       let span = document.getElementById("col-"+ i +"-"+ j)
-      let n_mine = number_mine(i ,j, matriz, width_board, length_board)
+      
       span.innerHTML = ""
-      if (n_mine >= 0) {
-        p.innerText = n_mine
-        span.appendChild(p);
-      } else {
-        var img = document.createElement('img');
-        img.src = 'bomb.png';
-        img.alt = 'Descrição da imagem';
-        img.style.width = "20px"
-        img.style.height= "20px"
-        img.style.backgroundImage= "none"
-        img.style.alignContent= "center"
-        img.className="bomb"
-        span.appendChild(p)
-        p.appendChild(img);
-      }
+     
+      
     }
     
 
   }
-
+  visited = [] // Reset visited matrix
 
 }
 
-
+// On click of the reset button
 function fnreset() {
-
+    Reset_lose()
     new_mat()
-    
+   
     event(true)
 }
+// On click of a cell in the board
+function play(e) {
+  if (e.target.tagName.toLowerCase() === 'span') {
+  const __ = e.target;
+  if (__.id.startsWith("col")) {
+    var wid = parseInt(__.id.split("-")[1]);
+    var len = parseInt(__.id.split("-")[2]);
+  Draw_play(wid ,len)
+  }
+  if (win == true) {
+    event(false)
+    for (let i = 0; i < width_board ; i++) {
+      for (let j = 0; j < length_board ; j++) {
+        draw(number_mine(i, j, matriz, width_board, length_board),"col-"+ i +"-"+ j)
+      }
+    }
+  }
+  if (lose == true) {
+    event(false)
+    alert("You lose!!!")
+    for (let i = 0; i < width_board ; i++) {
+      for (let j = 0; j < length_board ; j++) {
+        draw(number_mine(i, j, matriz, width_board, length_board),"col-"+ i +"-"+ j)
+      }
+    }
+  }
+}
+}
+function Draw_play(wid, len){
+ 
+   // Initialize visited matrix if it's not already initialized
+   if (visited.length === 0) {
+    for (var i = 0; i < matriz.length; i++) {
+        visited[i] = [];
+        for (var j = 0; j < matriz[i].length; j++) {
+            visited[i][j] = false;
+        }
+      }
+    }
+    // Check if cell is out of bounds or already visited
+    if (wid < 0 || len < 0 || wid >= matriz.length || len >= matriz[0].length || visited[wid][len]) {
+      return;
+    }
+    visited[wid][len] = true; // Mark cell as visited
+
+    var number_mine_1 = number_mine(wid, len, matriz, width_board, length_board)
+    if (number_mine_1 != 0 || matriz[wid][len] == 1) {
+      draw(number_mine_1,"col-"+ wid +"-"+ len)
+    }else if (number_mine_1 == 0){
+      draw(number_mine_1,"col-"+ wid +"-"+ len)
+      //alert("click:  "+ "col-"+ wid +"-"+ len)
+      Draw_play(wid-1, len)   
+      Draw_play(wid, len+1)
+      Draw_play(wid, len-1)    
+      Draw_play(wid+1, len)    
+    }
+  }
